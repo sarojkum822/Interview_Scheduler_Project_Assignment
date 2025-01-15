@@ -56,7 +56,7 @@ const createInterview = async (req, res) => {
     const conflict = await validateTimeSlot(interviewerName, candidateName, date, timeSlot);
     if (conflict) return res.status(400).json({ message: 'Time slot conflict detected' });
 
-    const interview = new Interview({ candidateName, interviewerName, date, timeSlot, interviewType });
+    const interview = new Interview({ candidateName, interviewerName, date, timeSlot, interviewType,email });
     await interview.save();
 
     const subject = 'Interview Scheduled';
