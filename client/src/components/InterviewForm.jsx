@@ -60,7 +60,7 @@ const InterviewForm = ({ currentInterview, setCurrentInterview }) => {
     const inputClassName = "border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full";
 
     return (
-        <div className="mb-6">
+        <div className="mb-6 mt-4">
             <form onSubmit={handleSubmit} className="bg-white p-4 border border-gray-300 rounded-lg shadow-md">
                 <h2 className="text-xl font-semibold mb-4">
                     {currentInterview ? 'Edit Interview' : 'Schedule Interview'}
