@@ -13,6 +13,7 @@ const InterviewForm = ({ currentInterview, setCurrentInterview }) => {
         date: '',
         timeSlot: '',
         interviewType: '',
+        email: '' // Add email field to the form data
     });
 
     useEffect(() => {
@@ -25,6 +26,7 @@ const InterviewForm = ({ currentInterview, setCurrentInterview }) => {
                 date: '',
                 timeSlot: '',
                 interviewType: '',
+                email: '' // Reset email if editing
             });
         }
     }, [currentInterview]);
@@ -108,6 +110,16 @@ const InterviewForm = ({ currentInterview, setCurrentInterview }) => {
                 <option value="HR">HR</option>
                 <option value="Behavioral">Behavioral</option>
             </select>
+            {/* New email input field */}
+            <input
+                type="email"
+                name="email"
+                placeholder="Candidate Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 p-2 w-52 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
             <button
                 type="submit"
                 className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200 ml-2"
