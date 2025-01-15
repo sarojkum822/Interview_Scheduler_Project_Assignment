@@ -6,8 +6,11 @@ import { toast } from "react-toastify";
 
 const InterviewDashboard = () => {
   const dispatch = useDispatch();
-  const { interviews, loading, error } = useSelector((state) => state.interviews);
+  const { interviews, loading, error } = useSelector(
+    (state) => state.interviews
+  );
   const [currentInterview, setCurrentInterview] = useState(null);
+  const [showForm, setShowForm] = useState(true); // State to toggle form visibility
 
   useEffect(() => {
     dispatch(fetchInterviews());
@@ -27,16 +30,40 @@ const InterviewDashboard = () => {
   if (error) return <div className="text-red-500 p-4">Error: {error}</div>;
 
   return (
-    <div className="p-4">
+    <div className="p-4 m-2">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold mb-6">Interview Dashboard</h2>
+        <a
+          href="/simplecalender"
+          className="border-2 p-2 rounded-md flex items-center justify-center m-2 px-2 bg-sky-600 hover:bg-sky-700 text-white"
+        >
+          Calendar View
+        </a>
+      </div>
+
+      {/* Toggle Button */}
+      <button
+        className={`mb-4 px-4 py-2 rounded ${
+          showForm ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"
+        } text-white transition duration-200`}
+        onClick={() => setShowForm(!showForm)}
+      >
+        {showForm ? "Hide Form" : "Show Form"}
+      </button>
+
+      {/* Conditionally Render Form */}
+      {showForm && (
+        <InterviewForm
+          currentInterview={currentInterview}
+          setCurrentInterview={setCurrentInterview}
+        />
+      )}
+
       <h2 className="text-2xl font-bold mb-6">Scheduled Interviews</h2>
-
-      <InterviewForm
-        currentInterview={currentInterview}
-        setCurrentInterview={setCurrentInterview}
-      />
-
       {interviews.length === 0 ? (
-        <p className="text-gray-500 text-center py-4">No interviews scheduled.</p>
+        <p className="text-gray-500 text-center py-4">
+          No interviews scheduled.
+        </p>
       ) : (
         <>
           {/* Desktop View - Table */}
@@ -44,17 +71,28 @@ const InterviewDashboard = () => {
             <table className="min-w-full table-auto">
               <thead className="bg-gray-200 text-gray-600">
                 <tr>
-                  <th className="py-3 px-4 text-left font-semibold">Candidate</th>
-                  <th className="py-3 px-4 text-left font-semibold">Interviewer</th>
-                  <th className="py-3 px-4 text-left font-semibold">Date & Time</th>
+                  <th className="py-3 px-4 text-left font-semibold">
+                    Candidate
+                  </th>
+                  <th className="py-3 px-4 text-left font-semibold">
+                    Interviewer
+                  </th>
+                  <th className="py-3 px-4 text-left font-semibold">
+                    Date & Time
+                  </th>
                   <th className="py-3 px-4 text-left font-semibold">Type</th>
                   <th className="py-3 px-4 text-left font-semibold">Email</th>
-                  <th className="py-3 px-4 text-right font-semibold">Actions</th>
+                  <th className="py-3 px-4 text-right font-semibold">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="text-gray-800">
                 {interviews.map((interview) => (
-                  <tr key={interview._id} className="border-b hover:bg-gray-100">
+                  <tr
+                    key={interview._id}
+                    className="border-b hover:bg-gray-100"
+                  >
                     <td className="py-3 px-4">{interview.candidateName}</td>
                     <td className="py-3 px-4">{interview.interviewerName}</td>
                     <td className="py-3 px-4">
@@ -97,7 +135,7 @@ const InterviewDashboard = () => {
                     {interview.interviewType}
                   </div>
                 </div>
-                
+
                 <div className="text-sm space-y-1">
                   <div>
                     <span className="font-medium">Interviewer: </span>

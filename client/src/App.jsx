@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import SimpleCalendar from "./components/BigCalender";
+import { IoMdArrowBack } from "react-icons/io";
 
 
 const App = () => {
@@ -20,10 +21,11 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div>
-          <div className="w-full bg-sky-300 p-4">
-            <h1 className="text-3xl font-light font-sans">Interview Scheduler</h1>
+          <div className="w-full bg-white-300 p-4 shadow-md">
+            <h1 className="text-3xl font-medium font-sans">Interview Scheduler</h1>
           </div>
           <Notification />  
+            
           <Routes>
             <Route path="/form" element={<InterviewForm />} />
             <Route path="/" element={<InterviewDashboard />} />
