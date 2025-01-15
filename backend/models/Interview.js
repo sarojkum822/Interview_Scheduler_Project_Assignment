@@ -22,6 +22,11 @@ const interviewSchema = new mongoose.Schema({
         enum: ['Technical', 'HR', 'Behavioral'],
         required: true
     },
+    email:{
+        type:String,
+        required:true
+
+    }
 }, { timestamps: true });
 
 export default mongoose.model('Interview', interviewSchema);

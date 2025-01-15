@@ -122,9 +122,9 @@ const InterviewForm = ({ currentInterview, setCurrentInterview }) => {
             />
             <button
                 type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200 ml-2"
+                className="bg-blue-600 text-white px-8 py-2 rounded hover:bg-blue-700 transition duration-200"
             >
-                {currentInterview ? 'Update Interview' : 'Schedule Interview'}
+                {currentInterview ? 'Update' : 'Schedule'}
             </button>
         </form>
     );
